@@ -1,0 +1,35 @@
+.producto img {
+    width: 200px;  
+    height: 200px; 
+    object-fit: cover;
+    border-radius: 100px; 
+    
+}
+
+.productos {
+    display: flex;
+    gap: 20px; 
+    flex-wrap: wrap; 
+    text-align: center;
+}
+
+.producto {
+    background-color: brown;
+    border-radius: 10;
+    padding: 10px;
+    text-align: center;
+    width: 220px; 
+    margin: 10px;
+    font-size: medium;
+}
+
+
+.carro{
+    background-color: brown;
+    border-radius: 10;
+    padding: 10px;
+    text-align: center;
+    width: 220px; 
+    margin: 10px;
+    font-size: medium;
+}
