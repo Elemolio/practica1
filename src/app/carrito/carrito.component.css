@@ -1,3 +1,20 @@
+/* Fondo gris para el carrito */
+.carro {
+    background-color: #f0f0f0;  /* Fondo gris claro */
+    color: white;
+    padding: 10px 20px;
+    border-radius: 5px;
+    text-decoration: none;
+    font-size: 16px;
+    display: block;
+    margin: 20px auto;
+}
+
+/* Estilo para el botón de carrito (con ícono) */
+.carro:hover {
+    background-color: #28a745;
+}
+
 /* Estilo para cada elemento del carrito */
 .carrito-item {
     display: flex;
