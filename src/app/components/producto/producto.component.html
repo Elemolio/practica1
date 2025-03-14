@@ -3,8 +3,8 @@
     <div *ngFor="let producto of productos" class="producto-card">
         <img class="producto-img" [src]="producto.imagen" alt="{{producto.nombre}}">
         <h3 class="producto-nombre">{{producto.nombre}}</h3>
-        <p class="producto-precio">$ {{producto.precio}}</p>
-        <button class="agregar-button" (click)="agregarACarrito(producto)">
+        <p class="producto-precio">$ {{producto.precioP}}</p>  <!-- Se asegura de que el precio se muestre -->
+        <button class="agregar-button" (click)="agregarAlCarrito(producto)">
             <i class="fas fa-shopping-cart"></i> Agregar
         </button>
     </div>
@@ -13,4 +13,8 @@
 <h2></h2>
 <button class="carro" (click)="irAlCarrito()">
     <img src="/assets/icono-carrito.png" alt="Carrito" class="carrito-icon"> Ir al carrito
+</button>
+
+<button class="Inventario" (click)="irAlInventario()">
+     Ir al Inventario
 </button>

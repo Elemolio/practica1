@@ -1,15 +1,12 @@
 import { Component } from '@angular/core';
-import { RouterModule,RouterOutlet } from '@angular/router';
-import { ProductoComponent } from './components/producto/producto.component';
+import { HttpClientModule } from '@angular/common/http';
+import { RouterModule } from '@angular/router';
+
 
 @Component({
   selector: 'app-root',
   standalone: true,
-  imports: [RouterOutlet,ProductoComponent,RouterModule],
-  templateUrl: './app.component.html',
-  template:'<router-outlet></router-outlet>',
-  styleUrl: './app.component.css'
-})
-export class AppComponent {
-  title = 'mi-proyecto';
-}
+  imports: [RouterModule],
+  template: '<router-outlet></router-outlet>'})
+export class AppComponent {}
+

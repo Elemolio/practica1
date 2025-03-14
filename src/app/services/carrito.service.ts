@@ -1,75 +1,73 @@
 import { Injectable } from '@angular/core';
-import { Producto } from '../models/product';
+import { Producto } from '../models/producto';
+
 @Injectable({
   providedIn: 'root'
 })
 export class CarritoService {
-  private carrito:Producto[]=[];
+  private carrito:Producto[] = [];
   agregarProducto(producto:Producto){
     this.carrito.push(producto);
   }
+
   obtenerCarrito():Producto[]{
     return this.carrito;
   }
   generarXML(): string {
-    let xml = '<?xml version="1.0" encoding="UTF-8"?>\n';
-    xml += '<factura>\n';
-    xml += '  <productos>\n';
-  
-    let subtotal = 0;
-    let productosAgrupados: { [id: string]: { nombre: string; precio: number; cantidad: number } } = {};
-  
+    let xml = `<?xml version="1.0" encoding="UTF-8"?>\n<recibo>\n`;
+    xml += `  <Factura>\n`;
+    xml += `    <Encabezado>\n`;
+    xml += `      <Emisor>\n`;
+    xml += `        <Nombre>Nombre de la empresa</Nombre>\n`;
+    xml += `        <RFC>RFCEmpresa</RFC>\n`;
+    xml += `        <Domicilio>Ceti Colomos #12</Domicilio>\n`;
+    xml += `      </Emisor>\n`;
+    xml += `      <Receptor>\n`;
+    xml += `        <Nombre>Larisa Alvarez</Nombre>\n`;
+    xml += `      </Receptor>\n`;
+    xml += `      <Fecha>2021-10-12</Fecha>\n`;
+    xml += `      <NumFactura>1234</NumFactura>\n`;
+    xml += `    </Encabezado>\n`;
+    xml += `    <Detalles>\n`;
+    this.carrito.forEach((producto) => {
+      xml += `        <producto>\n`;
+      xml += `          <id>${producto.id}</id>\n`;
+      xml += `          <nombre>${producto.nombre}</nombre>\n`;
+      xml += `          <precio>${producto.precioP}</precio>\n`;
+      xml += `        </producto>\n`;
+    });
+    xml += `    </Detalles>\n`;
+
+    let subtotal = this.carrito.reduce((sum, producto) => sum + Number(producto.precioP), 0);
+    let iva = subtotal * 0.16;
+    let total = subtotal + iva;
     
-    this.carrito.forEach(producto => {
-      if (productosAgrupados[producto.id]) {
-        productosAgrupados[producto.id].cantidad += 1;
-      } else {
-        productosAgrupados[producto.id] = {
-          nombre: producto.nombre,
-          precio: producto.precio,
-          cantidad: 1, 
-        };
-      }
-    });
-  
-    Object.entries(productosAgrupados).forEach(([id, producto]) => {
-      const totalProducto = producto.precio * producto.cantidad;
-      subtotal += totalProducto; 
-  
-      xml += `    <producto id="${id}">\n`;
-      xml += `      <descripcion>${producto.nombre}</descripcion>\n`;
-      xml += `      <cantidad>${producto.cantidad}</cantidad>\n`;
-      xml += `      <precioUnitario>${producto.precio.toFixed(2)}</precioUnitario>\n`;
-      xml += `      <total>${totalProducto.toFixed(2)}</total>\n`;
-      xml += `    </producto>\n`;
-    });
-  
-  
-    const tasaIVA = 0.16;
-    const iva = subtotal * tasaIVA;
-    const totalFactura = subtotal + iva;
-  
-    xml += '  </productos>\n';
-    xml += '  <totales>\n';
-    xml += `    <subtotal>${subtotal.toFixed(2)}</subtotal>\n`;
-    xml += `    <iva tasa="16%">${iva.toFixed(2)}</iva>\n`;
-    xml += `    <total>${totalFactura.toFixed(2)}</total>\n`;
-    xml += '  </totales>\n';
-    xml += '</factura>';
-  
-   
-    const blob = new Blob([xml], { type: 'application/xml' });
-    const url = URL.createObjectURL(blob);
-    const a = document.createElement('a');
-    a.href = url;
-    a.download = 'factura.xml';
-    document.body.appendChild(a);
-    a.click();
-    document.body.removeChild(a);
+    xml += `    <Totales>\n`;
+    xml += `      <subtotal>${subtotal.toFixed(2)}</subtotal>\n`;
+    xml += `      <iva>${iva.toFixed(2)}</iva>\n`;
+    xml += `      <total>${total.toFixed(2)}</total>\n`;
+    xml += `    </Totales>\n`;
+    xml += `  </Factura>\n`;
+    xml += `</recibo>`;
   
     return xml;
   }
-  eliminarDelCarrito(index: number) {
+  
+  
+
+  descargarXML(xml:string){
+    const blob = new Blob([xml], {type: 'application/xml'});
+    const url = URL.createObjectURL(blob);
+    const a = document.createElement('a');
+    a.href = url;
+    a.download = 'recibo.xml';
+    document.body.appendChild(a);
+    a.click();
+    document.body.removeChild(a);
+  }
+
+  eliminarProducto(index:number){
     this.carrito.splice(index, 1);
   }
+  
 }

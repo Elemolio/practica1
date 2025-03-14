@@ -1,0 +1,67 @@
+/* Fondo gris para el carrito */
+.carro {
+    background-color: #f0f0f0;  /* Fondo gris claro */
+    color: white;
+    padding: 10px 20px;
+    border-radius: 5px;
+    text-decoration: none;
+    font-size: 16px;
+    display: block;
+    margin: 20px auto;
+}
+
+/* Estilo para el botón de carrito (con ícono) */
+.carro:hover {
+    background-color: #28a745;
+}
+
+/* Estilo para cada elemento del carrito */
+.carrito-item {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 10px;
+    background-color: #fff;
+    border-radius: 5px;
+    box-shadow: 0px 0px 5px rgba(0, 0, 0, 0.1);
+    margin-bottom: 10px;
+    max-width: 500px; 
+}
+
+/* Estilo para la imagen del producto */
+.carrito-item-img {
+    width: 50px;
+    height: 50px;
+    object-fit: cover;
+    margin-right: 10px;
+    border-radius: 5px;
+}
+
+/* Detalles del producto (nombre y precio) */
+.carrito-item-details {
+    flex-grow: 1;
+    text-align: left;
+    white-space: nowrap; 
+    overflow: hidden;
+    text-overflow: ellipsis;
+    max-width: 250px; 
+    font-size: 14px; 
+}
+
+/* Estilo del botón "Pagar" */
+.carro-button {
+    background-color: #ff6347;
+    padding: 8px 15px;
+    color: white;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    width: auto; 
+    margin-top: 15px; 
+    font-size: 14px;
+    text-align: center;
+}
+
+.carro-button:hover {
+    background-color: #ff4500;
+}
