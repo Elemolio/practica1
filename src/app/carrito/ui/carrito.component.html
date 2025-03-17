@@ -1,0 +1,23 @@
+<div>
+    <h2>Carrito</h2>
+    @if (carrito.length > 0) {
+        <ul class="carrito-lista">
+            @for (producto of carrito; track producto.id) {
+            <li class="carrito-item">
+                <img [src]="producto.imagen" alt="{{producto.nombre}}" class="carrito-item-img">
+                <div class="carrito-item-details">
+                    {{producto.nombre}} - ${{producto.precio}}
+                </div>
+                <button (click)="eliminarProducto($index)">Eliminar</button>
+            </li>
+            }
+        </ul>
+        <button (click)="generarXML()" class="carrito-pagar">
+            Pagar
+        </button>
+    }
+
+    @if (carrito.length === 0) {
+        <p class="carrito-vacio">El carrito está vacío</p>
+    }
+</div>
